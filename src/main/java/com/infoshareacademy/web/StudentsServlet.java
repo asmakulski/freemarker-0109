@@ -17,8 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/welcome")
-public class WelcomeServlet extends HttpServlet {
+@WebServlet("/students")
+public class StudentsServlet extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
@@ -28,18 +28,17 @@ public class WelcomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Template template = templateProvider.getTemplate(getServletContext(), "welcome-user");
+        Template template = templateProvider.getTemplate(getServletContext(), "students");
 
         List<Student> students = studentRepository.getStudents();
 
-        Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("students", students);
+        Map<String, Object> model = new HashMap<>();
+        model.put("students", students);
 
         try {
-            template.process(dataModel, resp.getWriter());
+            template.process(model, resp.getWriter());
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-
     }
 }
