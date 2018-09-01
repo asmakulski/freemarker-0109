@@ -6,20 +6,27 @@
 </head>
 <body>
 
+Number of students: ${students?size}
 <table border="1">
     <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>First name</th>
+        <th>Last name</th>
         <th></th>
     </tr>
-    <#list students as student>
-    <tr>
-        <td>${student.firstName}</td>
-        <td>${student.lastName}</td>
-        <td><a href="student?id=${student.id}">Link</a></td>
+
+  <#list students as s>
+      <#if s?index % 2 == 0>
+          <#assign color="#dcdcdc">
+      <#else>
+          <#assign color="ffffff">
+      </#if>
+    <tr bgcolor="${color}">
+        <td>${s.firstName}</td>
+        <td>${s.lastName?upper_case}</td>
+        <td><a href="student?id=${s.id}">View</a></td>
     </tr>
-    </#list>
+  </#list>
 </table>
-<<#include "footer.ftlh">
+<#include "footer.ftlh">
 </body>
 </html>
