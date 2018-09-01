@@ -1,8 +1,12 @@
 package com.infoshareacademy.web;
 
+import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.repository.StudentRepository;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 
 import java.io.IOException;
+import java.util.HashMap;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +20,9 @@ public class TestServlet extends HttpServlet {
     @Inject
     private StudentRepository studentRepository;
 
+    @Inject
+    private TemplateProvider templateProvider;
+
     @Override
     public void init() throws ServletException {
         System.out.println("Servlet zostal utworzony");
@@ -24,10 +31,17 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws IOException {
-        int size = studentRepository.getStudents().size();
+/*        int size = studentRepository.getStudents().size();
         resp.getWriter().println("Number of students: " + size);
 
         String name = req.getParameter("name");
-        resp.getWriter().println("Hello " + name);
+        resp.getWriter().println("Hello " + name);*/
+
+        Template template = templateProvider.getTemplate(getServletContext(), "test");
+        try {
+            template.process(new HashMap<>(), resp.getWriter());
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
     }
 }
