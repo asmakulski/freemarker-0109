@@ -8,8 +8,8 @@
     <h1>First Name: ${student.firstName}!</h1>
     <h1>Last Name: ${student.lastName}</h1>
     <h2>Grades
-    <#list student.grades as s>
-        #{s}<#sep>, </#sep>
+    <#list student.grades as g>
+        #{g}<#sep>, </#sep>
     <#else>
     NO VALUES
     </#list>
@@ -22,5 +22,6 @@
     <h1 style="color: red">INACTIVE</h1>
 </#if>
 </p>
+<#include "footer.ftlh">
 </body>
 </html>
