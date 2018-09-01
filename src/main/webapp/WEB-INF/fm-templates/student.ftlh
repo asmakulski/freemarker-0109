@@ -7,6 +7,13 @@
 <body>
     <h1>First Name: ${student.firstName}!</h1>
     <h1>Last Name: ${student.lastName}</h1>
+    <h2>Grades
+    <#list student.grades as s>
+        #{s}<#sep>, </#sep>
+    <#else>
+    NO VALUES
+    </#list>
+    </h2>
 
 <p>
 <#if student.active == true>
