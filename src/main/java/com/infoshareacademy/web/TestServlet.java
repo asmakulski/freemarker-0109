@@ -26,5 +26,8 @@ public class TestServlet extends HttpServlet {
         throws IOException {
         int size = studentRepository.getStudents().size();
         resp.getWriter().println("Number of students: " + size);
+
+        String name = req.getParameter("name");
+        resp.getWriter().println("Hello " + name);
     }
 }
